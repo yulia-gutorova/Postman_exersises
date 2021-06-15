@@ -1,0 +1,654 @@
+{
+	"info": {
+		"_postman_id": "c9abe9ae-d283-468a-8d5b-c3de45687d81",
+		"name": "Reqres.in_tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get a list of users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\">>>>> Get a list of users\");\r",
+							"\r",
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"YYYY-MM-DD\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"//************************************************* \r",
+							"//response status testing \r",
+							"//************************************************* \r",
+							"\r",
+							"pm.test (\">>> Status code is 200\", function()\r",
+							"    {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> Status code name has string 'OK'\", function()\r",
+							"    {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> Response is in json format\", function()\r",
+							"    {\r",
+							"    pm.response.to.be.json;\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> Response time is less than 500\", function()\r",
+							"    {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"    });\r",
+							"\r",
+							"//************************************************* \r",
+							"//response body testing\r",
+							"//************************************************* \r",
+							"pm.test (\">>> Response is not empty\", function()\r",
+							"    {\r",
+							"    pm.expect(jsonData).to.be.not.empty;\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> Response has type object\", function()\r",
+							"    {\r",
+							"        pm.expect(jsonData).to.be.a(\"object\")\r",
+							"    });\r",
+							"\r",
+							"pm.test(\">>> Response must have properties\", () => {\r",
+							"  pm.expect(jsonData).to.have.property('page');\r",
+							"  pm.expect(jsonData).to.have.property('per_page');\r",
+							"  pm.expect(jsonData).to.have.property('total_pages');\r",
+							"  pm.expect(jsonData).to.have.property('total');\r",
+							"  pm.expect(jsonData).to.have.property('data');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\">>> All elements in data array must have properties\", () => \r",
+							"    {\r",
+							"         _.each(jsonData.data, (item) => \r",
+							"         {\r",
+							"            pm.expect(item).to.have.property('id');\r",
+							"            pm.expect(item).to.have.property('email');\r",
+							"            pm.expect(item).to.have.property('first_name');\r",
+							"            pm.expect(item).to.have.property('last_name');\r",
+							"            pm.expect(item).to.have.property('avatar');\r",
+							"         })\r",
+							"   });\r",
+							"\r",
+							"pm.test (\">>> Response length is 6\", function()\r",
+							"    {\r",
+							"        pm.expect(jsonData.data.length).to.eql(6)\r",
+							"    }); \r",
+							"\r",
+							"pm.test (\">>> Page number is 2\", function()\r",
+							"    {\r",
+							"        pm.expect(jsonData.page).to.eql(2)\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> Users per page is 6\", function()\r",
+							"    {\r",
+							"        pm.expect(jsonData.per_page).to.eql(jsonData.data.length)\r",
+							"    }); \r",
+							"\r",
+							"pm.test (\">>> Total users is 12\", function()\r",
+							"    {\r",
+							"        pm.expect(jsonData.total).to.eql(12)\r",
+							"    }); \r",
+							"\r",
+							"pm.test (\">>> Total pages is 2\", function()\r",
+							"    {\r",
+							"        pm.expect(jsonData.total_pages).to.eql(2)\r",
+							"    }); \r",
+							"\r",
+							"pm.test('>>> All emails contain @', () => \r",
+							"    {\r",
+							"         _.each(jsonData.data, (item) => \r",
+							"         {\r",
+							"          pm.expect(item.email).to.contains('@')\r",
+							"         })\r",
+							"   });\r",
+							"\r",
+							"pm.test('>>> Name fields are not empty', () => \r",
+							"    {\r",
+							"         _.each(jsonData.data, (item) => \r",
+							"         {\r",
+							"          pm.expect(item.first_name).to.be.not.empty;\r",
+							"         })\r",
+							"\r",
+							"         _.each(jsonData.data, (item) => \r",
+							"         {\r",
+							"          pm.expect(item.last_name).to.be.not.empty;\r",
+							"         })\r",
+							"   });  \r",
+							"\r",
+							"//************************************************* \r",
+							"//response headers testing\r",
+							"//*************************************************    \r",
+							"pm.test (\">>> Response headers contain 'Date' header\", function()\r",
+							"    {\r",
+							"    pm.expect(pm.response).to.have.header(\"Date\");\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> Response headers contain 'Content-Type' header\", function()\r",
+							"    {\r",
+							"    pm.expect(pm.response).to.have.header(\"Content-Type\");\r",
+							"    });\r",
+							"\r",
+							"pm.test(\">>> Content-type header contains 'application/json'\", function() \r",
+							"    {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.contains('application/json');\r",
+							"    });     \r",
+							"\r",
+							"\r",
+							"//************************************************* \r",
+							"//set collection variables\r",
+							"//*************************************************\r",
+							"pm.collectionVariables.set(\"id\", jsonData.data[0].id);\r",
+							"pm.collectionVariables.set(\"first_name\", jsonData.data[0].first_name);\r",
+							"pm.collectionVariables.set(\"last_name\", jsonData.data[0].last_name);\r",
+							"pm.collectionVariables.set(\"email\", jsonData.data[0].email);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}{{api}}?page=2",
+					"host": [
+						"{{url}}{{api}}"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a single user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"//************************************************* \r",
+							"//response status testing \r",
+							"//************************************************* \r",
+							"\r",
+							"pm.test (\">>> Status code is 200\", function()\r",
+							"    {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> Status code name has string 'OK'\", function()\r",
+							"    {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> Response is in json format\", function()\r",
+							"    {\r",
+							"    pm.response.to.be.json;\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> Response time is less than 500\", function()\r",
+							"    {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"    });\r",
+							"\r",
+							"//************************************************* \r",
+							"//response body testing\r",
+							"//************************************************* \r",
+							"pm.test (\">>> Response body is not empty\", function()\r",
+							"    {\r",
+							"    pm.expect(jsonData).to.be.not.empty;\r",
+							"    });\r",
+							"\r",
+							"pm.test(\">>> Respose properties\", () => {\r",
+							"  pm.expect(jsonData).to.have.property('data');\r",
+							"  pm.expect(jsonData).to.have.property('support');\r",
+							"});\r",
+							"\r",
+							"pm.test(\">>> Response nested properties\", function() \r",
+							"{\r",
+							"    pm.expect(jsonData.data).to.have.property('id');\r",
+							"    pm.expect(jsonData.data).to.have.property('email');\r",
+							"    pm.expect(jsonData.data).to.have.property('first_name');\r",
+							"    pm.expect(jsonData.data).to.have.property('last_name');\r",
+							"    pm.expect(jsonData.data).to.have.property('last_name');\r",
+							"\r",
+							"    pm.expect(jsonData.support).to.have.property('url');\r",
+							"    pm.expect(jsonData.support).to.have.property('text');\r",
+							"});\r",
+							"//Schema validation\r",
+							"const schema =\r",
+							"{\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\":\r",
+							"        {\r",
+							"        \"data\" : {\"type\" : \"object\",\r",
+							"            \"properties\": \r",
+							"            {\r",
+							"                \"id\"        : {\"type\" : \"number\"},\r",
+							"                \"email\"     : {\"type\" : \"string\"},\r",
+							"                \"first_name\": {\"type\" : \"string\"},\r",
+							"                \"last_name\" : {\"type\" : \"string\"},\r",
+							"                 \"avatar\"   : {\"type\" : \"string\"},\r",
+							"            }\r",
+							"        },\r",
+							"        \"support\" : {\"type\" : \"object\",\r",
+							"                        \"properties\": \r",
+							"            {\r",
+							"                \"url\": {\"type\" : \"string\"},\r",
+							"                \"text\":{\"type\" : \"string\"},\r",
+							"            }\r",
+							"        }\r",
+							"        }\r",
+							"};\r",
+							"\r",
+							"pm.test('>>> Schema is valid', function() {\r",
+							"  pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"//---------------------------------------------\r",
+							"\r",
+							"pm.test (\">>> User verification\", function()\r",
+							"    {\r",
+							"        pm.expect(jsonData.data.id).to.eql(pm.collectionVariables.get(\"id\")),\r",
+							"        pm.expect(jsonData.data.first_name).to.eql(pm.collectionVariables.get(\"first_name\")),\r",
+							"        pm.expect(jsonData.data.last_name).to.eql(pm.collectionVariables.get(\"last_name\")),\r",
+							"        pm.expect(jsonData.data.email).to.eql(pm.collectionVariables.get(\"email\"))\r",
+							"    }); \r",
+							"\r",
+							"    \r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\">>>>> Get a single user\");\r",
+							"\r",
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"YYYY-MM-DD\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}{{api}}/{{id}}",
+					"host": [
+						"{{url}}{{api}}"
+					],
+					"path": [
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\">>>>> Uppdate a user\");\r",
+							"\r",
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"YYYY-MM-DD\"));\r",
+							"\r",
+							"console.log(\">>>>> Date today: \" + pm.globals.get(\"today\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"//************************************************* \r",
+							"//response status testing \r",
+							"//************************************************* \r",
+							"pm.test (\">>> Status code is 200\", function()\r",
+							"    {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    })\r",
+							"\r",
+							"pm.test (\">>> Status code name has string 'OK'\", function()\r",
+							"    {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"    })\r",
+							"\r",
+							"pm.test (\">>> Response is in json format\", function()\r",
+							"    {\r",
+							"    pm.response.to.be.json;\r",
+							"    })\r",
+							"\r",
+							"pm.test (\">>> Response time is less than 500\", function()\r",
+							"    {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"    })\r",
+							"\r",
+							"//************************************************* \r",
+							"//response body testing\r",
+							"//************************************************* \r",
+							"pm.test(\">>> Respose properties\", () => {\r",
+							"  pm.expect(jsonData).to.have.property('name');\r",
+							"  pm.expect(jsonData).to.have.property('job');\r",
+							"  pm.expect(jsonData).to.have.property('updatedAt')\r",
+							"});\r",
+							"\r",
+							"//Schema validation\r",
+							"const schema =\r",
+							"{\r",
+							"    \"type\": \"object\",\r",
+							"        \"properties\": \r",
+							"            {\r",
+							"                \"name\"     : {\"type\" : \"string\"},\r",
+							"                \"job\"      : {\"type\" : \"string\"},\r",
+							"                \"updatedAt\": {\"type\" : \"string\"},\r",
+							"            }     \r",
+							"};\r",
+							"\r",
+							"pm.test('>>> Schema is valid', function() {\r",
+							"  pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"//---------------------------------------------\r",
+							"\r",
+							"pm.test (\">>> Name is yulia\", function()\r",
+							"    {\r",
+							"    pm.expect(jsonData.name).to.eql(\"yulia\");\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> Job is supertester\", function()\r",
+							"    {\r",
+							"    pm.expect(jsonData.job).to.eql(\"tester\");\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> The date in response contains today date\", function()\r",
+							"    {\r",
+							"    pm.expect(jsonData.updatedAt).contains(pm.globals.get(\"today\"));\r",
+							"    });\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"yulia\",\r\n    \"job\": \"tester\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}{{api}}/2",
+					"host": [
+						"{{url}}{{api}}"
+					],
+					"path": [
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\">>>>> Delete a user\");\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"//************************************************* \r",
+							"//response status testing \r",
+							"//************************************************* \r",
+							" \r",
+							"pm.test (\">>> Status code is 204\", function()\r",
+							"    {\r",
+							"    pm.response.to.have.status(204);\r",
+							"    })\r",
+							"\r",
+							"pm.test (\">>> Status code name has string 'No content'\", function()\r",
+							"    {\r",
+							"    pm.response.to.have.status(\"No Content\");\r",
+							"    })\r",
+							"\r",
+							"pm.test (\">>> Response time is less than 500\", function()\r",
+							"    {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"    })\r",
+							"\r",
+							"//************************************************* \r",
+							"//response headers testing\r",
+							"//*************************************************   \r",
+							"\r",
+							"pm.test (\">>> Response headers contain 'Content-Length' header\", function()\r",
+							"    {\r",
+							"    pm.expect(pm.response).to.have.header(\"Content-Length\");\r",
+							"    });\r",
+							"\r",
+							"pm.test(\">>> The length of the content is 0\", function() \r",
+							"    {\r",
+							"  pm.expect(pm.response.headers.get('Content-Length')).to.eql(\"0\");\r",
+							"    }); \r",
+							"\r",
+							"pm.test (\">>> Response headers don't contain 'Content-Type' header\", function()\r",
+							"    {\r",
+							"    pm.expect(pm.response).to.have.not.header(\"Content-Type\");\r",
+							"    });\r",
+							"\r",
+							"  "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}{{api}}/2",
+					"host": [
+						"{{url}}{{api}}"
+					],
+					"path": [
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\">>>>> Create a new user\");\r",
+							"\r",
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"YYYY-MM-DD\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"//************************************************* \r",
+							"//response status testing \r",
+							"//************************************************* \r",
+							"pm.test (\">>> Status code is 201\", function()\r",
+							"    {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    })\r",
+							"\r",
+							"pm.test (\">>> Status code name has string 'Created'\", function()\r",
+							"    {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"    })\r",
+							"\r",
+							"pm.test (\">>> Response is in json format\", function()\r",
+							"    {\r",
+							"    pm.response.to.be.json;\r",
+							"    })\r",
+							"\r",
+							"pm.test (\">>> Response time is less than 500\", function()\r",
+							"    {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"    })\r",
+							"\r",
+							"//************************************************* \r",
+							"//response body testing\r",
+							"//************************************************* \r",
+							"pm.test(\">>> Respose properties\", function() {\r",
+							"  pm.expect(jsonData).to.have.property('name');\r",
+							"  pm.expect(jsonData).to.have.property('job');\r",
+							"  pm.expect(jsonData).to.have.property('id');\r",
+							"  pm.expect(jsonData).to.have.property('createdAt');\r",
+							"});\r",
+							"\r",
+							"//Schema validation\r",
+							"const schema =\r",
+							"{\r",
+							"    \"type\": \"object\",\r",
+							"        \"properties\": \r",
+							"            {\r",
+							"                \"name\"     : {\"type\" : \"string\"},\r",
+							"                \"job\"      : {\"type\" : \"string\"},\r",
+							"                \"id\"       : {\"type\" : \"string\"},\r",
+							"                \"createdAt\": {\"type\" : \"string\"}\r",
+							"            }\r",
+							"};\r",
+							"\r",
+							"pm.test('>>> Schema is valid', function() {\r",
+							"  pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"//---------------------------------------------\r",
+							"\r",
+							"pm.test (\">>> Name is uggla\", function()\r",
+							"    {\r",
+							"    pm.expect(jsonData.name).to.eql(pm.environment.get(\"user_name\"));\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> Job is supertester\", function()\r",
+							"    {\r",
+							"    pm.expect(jsonData.job).to.eql(pm.environment.get(\"user_job\"));\r",
+							"    });\r",
+							"\r",
+							"pm.test (\">>> The date in response contains today date\", function()\r",
+							"    {\r",
+							"    pm.expect(jsonData.createdAt).contains(pm.globals.get(\"today\"));\r",
+							"    });\r",
+							"\r",
+							"    "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{user_name}}\",\r\n    \"job\": \"{{user_job}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}{{api}}",
+					"host": [
+						"{{url}}{{api}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "first_name",
+			"value": ""
+		},
+		{
+			"key": "last_name",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		}
+	]
+}

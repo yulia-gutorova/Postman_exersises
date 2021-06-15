@@ -1,0 +1,449 @@
+{
+	"id": "1afb5cb6-3178-4d30-b170-f95d7eca1d26",
+	"name": "Reqres.in_tests",
+	"timestamp": "2021-06-15T10:01:00.385Z",
+	"collection_id": "c9abe9ae-d283-468a-8d5b-c3de45687d81",
+	"folder_id": 0,
+	"environment_id": "695785c0-d995-438f-9def-9550369d0e4c",
+	"totalPass": 51,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "99ee8f8b-0f72-48f2-987c-490916e5b247",
+			"name": "Get a list of users",
+			"url": "https://reqres.in/api/users?page=2",
+			"time": 65,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				">>> Status code is 200": true,
+				">>> Status code name has string 'OK'": true,
+				">>> Response is in json format": true,
+				">>> Response time is less than 500": true,
+				">>> Response is not empty": true,
+				">>> Response has type object": true,
+				">>> Response must have properties": true,
+				">>> All elements in data array must have properties": true,
+				">>> Response length is 6": true,
+				">>> Page number is 2": true,
+				">>> Users per page is 6": true,
+				">>> Total users is 12": true,
+				">>> Total pages is 2": true,
+				">>> All emails contain @": true,
+				">>> Name fields are not empty": true,
+				">>> Response headers contain 'Date' header": true,
+				">>> Response headers contain 'Content-Type' header": true,
+				">>> Content-type header contains 'application/json'": true
+			},
+			"testPassFailCounts": {
+				">>> Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Status code name has string 'OK'": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response is in json format": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response time is less than 500": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response has type object": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response must have properties": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> All elements in data array must have properties": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response length is 6": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Page number is 2": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Users per page is 6": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Total users is 12": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Total pages is 2": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> All emails contain @": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Name fields are not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response headers contain 'Date' header": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response headers contain 'Content-Type' header": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Content-type header contains 'application/json'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				65
+			],
+			"allTests": [
+				{
+					">>> Status code is 200": true,
+					">>> Status code name has string 'OK'": true,
+					">>> Response is in json format": true,
+					">>> Response time is less than 500": true,
+					">>> Response is not empty": true,
+					">>> Response has type object": true,
+					">>> Response must have properties": true,
+					">>> All elements in data array must have properties": true,
+					">>> Response length is 6": true,
+					">>> Page number is 2": true,
+					">>> Users per page is 6": true,
+					">>> Total users is 12": true,
+					">>> Total pages is 2": true,
+					">>> All emails contain @": true,
+					">>> Name fields are not empty": true,
+					">>> Response headers contain 'Date' header": true,
+					">>> Response headers contain 'Content-Type' header": true,
+					">>> Content-type header contains 'application/json'": true
+				}
+			]
+		},
+		{
+			"id": "0be733c8-04ae-4256-8039-cf82b6c4b495",
+			"name": "Get a single user",
+			"url": "https://reqres.in/api/users/7",
+			"time": 27,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				">>> Status code is 200": true,
+				">>> Status code name has string 'OK'": true,
+				">>> Response is in json format": true,
+				">>> Response time is less than 500": true,
+				">>> Response body is not empty": true,
+				">>> Respose properties": true,
+				">>> Response nested properties": true,
+				">>> Schema is valid": true,
+				">>> User verification": true
+			},
+			"testPassFailCounts": {
+				">>> Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Status code name has string 'OK'": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response is in json format": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response time is less than 500": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response body is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Respose properties": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response nested properties": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> User verification": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				27
+			],
+			"allTests": [
+				{
+					">>> Status code is 200": true,
+					">>> Status code name has string 'OK'": true,
+					">>> Response is in json format": true,
+					">>> Response time is less than 500": true,
+					">>> Response body is not empty": true,
+					">>> Respose properties": true,
+					">>> Response nested properties": true,
+					">>> Schema is valid": true,
+					">>> User verification": true
+				}
+			]
+		},
+		{
+			"id": "92d04f37-e463-4b02-be90-8aabb74ce9c5",
+			"name": "Update a user",
+			"url": "https://reqres.in/api/users/2",
+			"time": 157,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				">>> Status code is 200": true,
+				">>> Status code name has string 'OK'": true,
+				">>> Response is in json format": true,
+				">>> Response time is less than 500": true,
+				">>> Respose properties": true,
+				">>> Schema is valid": true,
+				">>> Name is yulia": true,
+				">>> Job is supertester": true,
+				">>> The date in response contains today date": true
+			},
+			"testPassFailCounts": {
+				">>> Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Status code name has string 'OK'": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response is in json format": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response time is less than 500": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Respose properties": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Name is yulia": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Job is supertester": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> The date in response contains today date": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				157
+			],
+			"allTests": [
+				{
+					">>> Status code is 200": true,
+					">>> Status code name has string 'OK'": true,
+					">>> Response is in json format": true,
+					">>> Response time is less than 500": true,
+					">>> Respose properties": true,
+					">>> Schema is valid": true,
+					">>> Name is yulia": true,
+					">>> Job is supertester": true,
+					">>> The date in response contains today date": true
+				}
+			]
+		},
+		{
+			"id": "cc4fbdf8-3b01-4161-8f43-495a1bb7bf7a",
+			"name": "Delete a user",
+			"url": "https://reqres.in/api/users/2",
+			"time": 107,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				">>> Status code is 204": true,
+				">>> Status code name has string 'No content'": true,
+				">>> Response time is less than 500": true,
+				">>> Response headers contain 'Content-Length' header": true,
+				">>> The length of the content is 0": true,
+				">>> Response headers don't contain 'Content-Type' header": true
+			},
+			"testPassFailCounts": {
+				">>> Status code is 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Status code name has string 'No content'": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response time is less than 500": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response headers contain 'Content-Length' header": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> The length of the content is 0": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response headers don't contain 'Content-Type' header": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				107
+			],
+			"allTests": [
+				{
+					">>> Status code is 204": true,
+					">>> Status code name has string 'No content'": true,
+					">>> Response time is less than 500": true,
+					">>> Response headers contain 'Content-Length' header": true,
+					">>> The length of the content is 0": true,
+					">>> Response headers don't contain 'Content-Type' header": true
+				}
+			]
+		},
+		{
+			"id": "31181de7-f69b-404b-beda-288585cdfc45",
+			"name": "Create a new user",
+			"url": "https://reqres.in/api/users",
+			"time": 116,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				">>> Status code is 201": true,
+				">>> Status code name has string 'Created'": true,
+				">>> Response is in json format": true,
+				">>> Response time is less than 500": true,
+				">>> Respose properties": true,
+				">>> Schema is valid": true,
+				">>> Name is uggla": true,
+				">>> Job is supertester": true,
+				">>> The date in response contains today date": true
+			},
+			"testPassFailCounts": {
+				">>> Status code is 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Status code name has string 'Created'": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response is in json format": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Response time is less than 500": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Respose properties": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Schema is valid": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Name is uggla": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> Job is supertester": {
+					"pass": 1,
+					"fail": 0
+				},
+				">>> The date in response contains today date": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				116
+			],
+			"allTests": [
+				{
+					">>> Status code is 201": true,
+					">>> Status code name has string 'Created'": true,
+					">>> Response is in json format": true,
+					">>> Response time is less than 500": true,
+					">>> Respose properties": true,
+					">>> Schema is valid": true,
+					">>> Name is uggla": true,
+					">>> Job is supertester": true,
+					">>> The date in response contains today date": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 472,
+	"collection": {
+		"requests": [
+			{
+				"id": "99ee8f8b-0f72-48f2-987c-490916e5b247",
+				"method": "GET"
+			},
+			{
+				"id": "0be733c8-04ae-4256-8039-cf82b6c4b495",
+				"method": "GET"
+			},
+			{
+				"id": "92d04f37-e463-4b02-be90-8aabb74ce9c5",
+				"method": "PUT"
+			},
+			{
+				"id": "cc4fbdf8-3b01-4161-8f43-495a1bb7bf7a",
+				"method": "DELETE"
+			},
+			{
+				"id": "31181de7-f69b-404b-beda-288585cdfc45",
+				"method": "POST"
+			}
+		]
+	}
+}
